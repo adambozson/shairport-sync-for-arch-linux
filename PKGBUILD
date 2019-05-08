@@ -2,7 +2,7 @@
 # This version from https://github.com/mikebrady/shairport-sync-PKGBUILD
 
 pkgname=shairport-sync-git
-pkgver=3.2.2.r27.g9adf8be
+pkgver=3.3
 pkgrel=1
 pkgdesc='AirPlay Audio Player'
 url='https://github.com/mikebrady/shairport-sync'
@@ -10,7 +10,7 @@ arch=(i686 x86_64 armv6h armv7h)
 license=('custom')
 backup=(etc/shairport-sync.conf)
 install='shairport-sync.install'
-depends=(alsa-lib libdaemon openssl avahi popt libsoxr libconfig)
+depends=(alsa-lib glib2 openssl avahi popt libsoxr libconfig)
 makedepends=(git)
 source=("git+https://github.com/mikebrady/shairport-sync.git"
 	shairport-sync.install
@@ -22,22 +22,16 @@ sha1sums=('SKIP'
           'fe62feeef1c947ed6ed3500b7b922dcaf9e8987c'
           '6c4979abddb4b1c0242a941279d41617ab8d183c')
 
-pkgver() {
-  cd shairport-sync
-#  git checkout development > /dev/null 2>&1
-  git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
-}
-
 prepare() {
   cd shairport-sync
-#  git checkout development > /dev/null 2>&1
+  git checkout development > /dev/null 2>&1
 }
 
 build() {
   cd shairport-sync
-#  git checkout development > /dev/null 2>&1
+  git checkout development > /dev/null 2>&1
   autoreconf -i -f
-  ./configure --with-alsa --with-avahi --with-ssl=openssl --with-soxr --without-configfiles --prefix=/usr --sysconfdir=/etc
+  ./configure --with-dbus-interface --with-alsa --with-avahi --with-ssl=openssl --with-soxr --without-configfiles --prefix=/usr --sysconfdir=/etc
   make
 }
 
@@ -46,7 +40,7 @@ package() {
   install -D -m644 shairport-sync.conf "$pkgdir/etc/conf.d/shairport-sync"
 
   cd shairport-sync
-#  git checkout development > /dev/null 2>&1
+  git checkout development > /dev/null 2>&1
   install -D -m664 LICENSES "$pkgdir/usr/share/licenses/$pkgname/LICENSE"  
 
   make DESTDIR="$pkgdir" install
