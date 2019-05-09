@@ -44,6 +44,7 @@ package() {
   install -D -m664 LICENSES "$pkgdir/usr/share/licenses/$pkgname/LICENSE"  
 
   make DESTDIR="$pkgdir" install
-  install -D -m644 scripts/shairport-sync.conf "$pkgdir/etc/shairport-sync.conf"
+  [ -e "$pkgdir/etc/shairport-sync.conf" ] || install -D -m644 scripts/shairport-sync.conf "$pkgdir/etc/shairport-sync.conf"
   install -D -m644 scripts/shairport-sync.conf "$pkgdir/etc/shairport-sync.conf.sample"
+  install -D -m644 scripts/shairport-sync-dbus-policy.conf "$pkgdir/etc/dbus-1/system.d/shairport-sync-dbus.conf"
 }
