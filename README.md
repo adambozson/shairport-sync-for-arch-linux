@@ -1,6 +1,6 @@
-# Arch Linux package files for Shairport Sync
+# Arch Linux package files for Shairport Sync (Development Version)
 
-This package builds and optionally installs Shairport Sync on Arch Linux. It also creates a user and group to allow Shairport Sync to run as a daemon with the lowest possible privileges.
+This package builds and optionally installs the `development` version of Shairport Sync on Arch Linux. It also creates a user and group to allow Shairport Sync to run as a daemon with the lowest possible privileges.
 
 **Usage**
 
@@ -9,7 +9,7 @@ Download the package:
 $ git clone https://github.com/mikebrady/shairport-sync-for-arch-linux.git
 ```
 
-Move into the resulting directory:
+Move into the resulting directory and checkout the `development` version:
 ```
 $ cd shairport-sync-for-arch-linux
 ```
@@ -33,3 +33,13 @@ To enable Shairport Sync to start automatically as a service upon startup, enter
 # systemctl enable shairport-sync
 ```
 Reboot for it to take effect.
+
+**Note**
+
+The default non-root user `alarm` is not a member of the `audio` group, so it can not see or access any audio devices. To allow it to see and access audio devices, it must be added to the group `audio`:
+
+```
+# usermod -a -G audio alarm
+```
+
+When Shairport Sync has been installed and tested successfully, you may delete the `shairport-sync-for-arch-linux` directory and its contents, as they are no longer needed.
