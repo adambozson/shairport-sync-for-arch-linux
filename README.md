@@ -6,12 +6,12 @@ This package builds and optionally installs Shairport Sync on Arch Linux. It als
 
 Download the package:
 ```
-$ git clone https://github.com/mikebrady/shairport-sync-PKGBUILD.git
+$ git clone https://github.com/mikebrady/shairport-sync-for-arch-linux.git
 ```
 
 Move into the resulting directory:
 ```
-$ cd shairport-sync-PKGBUILD
+$ cd shairport-sync-for-arch-linux
 ```
 
 Execute the following command:
