@@ -10,7 +10,7 @@ arch=(i686 x86_64 armv6h armv7h)
 license=('custom')
 backup=(etc/shairport-sync.conf)
 install='shairport-sync.install'
-depends=(alsa-lib libdaemon openssl avahi popt libsoxr libconfig)
+depends=(alsa-lib libdaemon openssl avahi popt libsoxr libconfig libpulse)
 makedepends=(git)
 source=("git+https://github.com/mikebrady/shairport-sync.git"
 	shairport-sync.install
@@ -29,7 +29,7 @@ prepare() {
 build() {
   cd shairport-sync
   autoreconf -i -f
-  ./configure --with-alsa --with-avahi --with-ssl=openssl --with-soxr --without-configfiles --prefix=/usr --sysconfdir=/etc
+  ./configure --with-alsa --with-pa --with-avahi --with-ssl=openssl --with-soxr --without-configfiles --prefix=/usr --sysconfdir=/etc
   make
 }
 
